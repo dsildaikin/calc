@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="#e3e0de">
+    android:background="#f5f5f5">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="5dp">
+        android:layout_margin="10dp">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/resultLayout"
             android:layout_width="match_parent"
@@ -26,12 +26,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
                 <TextView
+                    android:id="@+id/inputField"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:text="Тест"
+                    android:text=""
                     android:textSize="20sp"
+                    android:textColor="@color/black"
                     android:gravity="center"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,11 +44,12 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:background="@drawable/input_shape_calc">
                 <TextView
+                    android:id="@+id/result"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:text="Тест"
+                    android:text=""
                     android:textSize="30sp"
                     android:layout_marginEnd="15dp"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -70,20 +73,21 @@
                     android:layout_width="145dp"
                     android:layout_height="70dp"
                     android:textSize="20sp"
-                    android:text="<-">
-
-                </Button>
+                    android:onClick="onClickDel"
+                    android:text="Удалить"/>
 
                 <Button
                     android:layout_width="76dp"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="12dp"
                     android:text="+-"
+                    android:onClick="onClickPlusMinus"
                     android:textSize="20sp" />
                 <Button
-                    android:layout_width="140dp"
+                    android:layout_width="120dp"
                     android:layout_height="70dp"
                     android:textSize="20sp"
+                    android:onClick="onClickClear"
                     android:text="C"/>
             </LinearLayout>
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -101,6 +105,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     android:text="7"
                     android:textSize="30dp"
+                    android:onClick="onDigitClick"
                     android:background="@drawable/custom_button_digit"/>
                 <Button
                     android:id="@+id/digit8"
@@ -111,6 +116,7 @@
                     android:text="8"
                     android:textSize="30dp"
                     android:layout_marginHorizontal="15dp"
+                    android:onClick="onDigitClick"
                     android:background="@drawable/custom_button_digit"/>
                 <Button
                     android:id="@+id/digit9"
@@ -121,6 +127,7 @@
                     android:text="9"
                     android:textSize="30dp"
                     android:layout_marginHorizontal="15dp"
+                    android:onClick="onDigitClick"
                     android:background="@drawable/custom_button_digit"/>
                 <Button
                     android:id="@+id/digit4"
@@ -131,6 +138,7 @@
                     app:layout_constraintTop_toBottomOf="@id/digit7"
                     android:text="4"
                     android:textSize="30dp"
+                    android:onClick="onDigitClick"
                     android:background="@drawable/custom_button_digit"/>
                 <Button
                     android:id="@+id/digit5"
@@ -142,6 +150,7 @@
                     app:layout_constraintTop_toBottomOf="@id/digit8"
                     android:text="5"
                     android:textSize="30dp"
+                    android:onClick="onDigitClick"
                     android:background="@drawable/custom_button_digit"/>
                 <Button
                     android:id="@+id/digit6"
@@ -153,6 +162,7 @@
                     app:layout_constraintTop_toBottomOf="@id/digit9"
                     android:text="6"
                     android:textSize="30dp"
+                    android:onClick="onDigitClick"
                     android:background="@drawable/custom_button_digit"/>
                 <Button
                     android:id="@+id/digit1"
@@ -163,6 +173,7 @@
                     app:layout_constraintTop_toBottomOf="@id/digit4"
                     android:text="1"
                     android:textSize="30dp"
+                    android:onClick="onDigitClick"
                     android:background="@drawable/custom_button_digit"/>
                 <Button
                     android:id="@+id/digit2"
@@ -174,6 +185,7 @@
                     app:layout_constraintTop_toBottomOf="@id/digit5"
                     android:text="2"
                     android:textSize="30dp"
+                    android:onClick="onDigitClick"
                     android:background="@drawable/custom_button_digit"/>
                 <Button
                     android:id="@+id/digit3"
@@ -185,6 +197,7 @@
                     app:layout_constraintTop_toBottomOf="@id/digit6"
                     android:text="3"
                     android:textSize="30dp"
+                    android:onClick="onDigitClick"
                     android:background="@drawable/custom_button_digit"/>
                 <Button
                     android:id="@+id/digit0"
@@ -195,6 +208,7 @@
                     app:layout_constraintTop_toBottomOf="@id/digit1"
                     android:text="0"
                     android:textSize="30dp"
+                    android:onClick="onDigitClick"
                     android:background="@drawable/custom_button_digit"/>
                 <Button
                     android:id="@+id/dot"
@@ -206,6 +220,7 @@
                     app:layout_constraintTop_toBottomOf="@id/digit3"
                     android:text="."
                     android:textSize="30dp"
+                    android:onClick="onClickDot"
                     android:background="@drawable/custom_button_digit"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -218,71 +233,78 @@
                     android:id="@+id/sqrt"
                     android:layout_width="65dp"
                     android:layout_height="65dp"
-                    android:layout_marginStart="15dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="15dp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     android:text="√"
+                    android:onClick="onClickSqrt"
                     android:textSize="30dp"/>
                 <Button
                     android:id="@+id/onex"
                     android:layout_width="65dp"
                     android:layout_height="65dp"
-                    android:layout_marginStart="15dp"
+                    android:layout_marginStart="5dp"
                     android:layout_marginTop="15dp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toEndOf="@id/sqrt"
                     android:text="1/x"
+                    android:onClick="onClickOnex"
                     android:textSize="15dp"/>
                 <Button
                     android:id="@+id/plus"
                     android:layout_width="65dp"
                     android:layout_height="65dp"
-                    android:layout_marginStart="15dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="15dp"
                     app:layout_constraintTop_toBottomOf="@id/sqrt"
                     app:layout_constraintStart_toStartOf="parent"
                     android:text="+"
+                    android:onClick="onClickOps"
                     android:textSize="30dp"/>
                 <Button
                     android:id="@+id/mult"
                     android:layout_width="65dp"
                     android:layout_height="65dp"
-                    android:layout_marginStart="15dp"
+                    android:layout_marginStart="5dp"
                     android:layout_marginTop="15dp"
                     app:layout_constraintTop_toBottomOf="@id/onex"
                     app:layout_constraintStart_toEndOf="@id/plus"
                     android:text="*"
+                    android:onClick="onClickOps"
                     android:textSize="30dp"/>
                 <Button
                     android:id="@+id/minus"
                     android:layout_width="65dp"
                     android:layout_height="65dp"
-                    android:layout_marginStart="15dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="15dp"
                     app:layout_constraintTop_toBottomOf="@id/plus"
                     app:layout_constraintStart_toStartOf="parent"
+                    android:onClick="onClickOps"
                     android:text="-"
                     android:textSize="30dp"/>
                 <Button
                     android:id="@+id/div"
                     android:layout_width="65dp"
                     android:layout_height="65dp"
-                    android:layout_marginStart="15dp"
+                    android:layout_marginStart="5dp"
                     android:layout_marginTop="15dp"
                     app:layout_constraintTop_toBottomOf="@id/mult"
                     app:layout_constraintStart_toEndOf="@id/minus"
                     android:text="/"
+                    android:onClick="onClickOps"
                     android:textSize="30dp"/>
                 <Button
                     android:id="@+id/equal"
-                    android:layout_width="140dp"
+                    android:layout_width="120dp"
                     android:layout_height="65dp"
-                    android:layout_marginStart="15dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="15dp"
                     app:layout_constraintTop_toBottomOf="@id/minus"
                     app:layout_constraintStart_toStartOf="parent"
                     android:text="="
+                    android:onClick="onClickEqual"
                     android:textSize="30dp"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
