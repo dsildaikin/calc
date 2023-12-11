@@ -55,6 +55,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mainLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/resultLayout"
@@ -308,6 +309,15 @@
                     android:textSize="30dp"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            app:layout_constraintTop_toBottomOf="@id/mainLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Показать результат"
+            android:layout_marginTop="20dp"
+            android:onClick="onClickShowRes"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,11 +2,12 @@ package com.sildtech.calc;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 
 public class MainActivity extends AppCompatActivity {
     TextView inputField;
@@ -117,18 +118,23 @@ public class MainActivity extends AppCompatActivity {
     public void onClickEqual(View view){
         try{
             secondNumber = Double.parseDouble(inputField.getText().toString());
+            inputField.setText("");
 
             switch (codeOp){
                 case 0:
+                    inputField.append(firstNumber + " + " + secondNumber);
                     resultNumber = firstNumber + secondNumber;
                     break;
                 case 1:
+                    inputField.append(firstNumber + " * " + secondNumber);
                     resultNumber = firstNumber * secondNumber;
                     break;
                 case 2:
+                    inputField.append(firstNumber + " - " + secondNumber);
                     resultNumber = firstNumber - secondNumber;
                     break;
                 case 3:
+                    inputField.append(firstNumber + " / " + secondNumber);
                     resultNumber = firstNumber / secondNumber;
                     break;
             }
@@ -151,5 +157,11 @@ public class MainActivity extends AppCompatActivity {
         catch (Exception e) {
             result.setText("Error");
         }
+    }
+
+    public void onClickShowRes(View view) {
+        Intent downloadIntent = new Intent(this, ShowerResultActivity.class);
+        downloadIntent.putExtra("restext", result.getText().toString());
+        this.startActivity(downloadIntent);
     }
 }
